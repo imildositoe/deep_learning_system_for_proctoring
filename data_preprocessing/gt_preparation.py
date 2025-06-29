@@ -13,7 +13,7 @@ def time_to_seconds(mmss):
 @param gt_path is the path of the gt.txt file
 """
 def gt_file_to_dict(gt_path):
-    dictionary = []
+    segments = []
     with open(gt_path, 'r') as file:
         for line in file:
             parts = line.strip().split()
@@ -22,16 +22,15 @@ def gt_file_to_dict(gt_path):
                 end = time_to_seconds(parts[1])
                 label = int(parts[2])
 
-                dictionary.append({
+                segments.append({
                     "start_time_in_sec": start,
                     "end_time_in_sec": end,
                     "cheating_type": label
                 })
-    return dictionary
+    return segments
 
-# Print the dictionary
+# Print the segments
 gt_file_path = os.path.join(r'C:\Users\Dell 88\Desktop\OEP database\subject1', 'gt.txt')
 cheating_dict = gt_file_to_dict(gt_file_path)
 for item in cheating_dict[:5]:
     print(item)
-
