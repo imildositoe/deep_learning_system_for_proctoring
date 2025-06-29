@@ -84,3 +84,27 @@ def extract_mfcc_for_segments(audio_path, segments, sr=22050, n_mfcc=13):
 audio_path = r'C:\Users\Dell 88\Desktop\OEP database\subject1\Yousef.wav'
 audio_segments = extract_mfcc_for_segments(audio_path, segments)
 print(f"Extracted {len(audio_segments)} audio segments")
+
+
+"""
+Function to combine video and audio into an unified format
+"""
+def combine_video_and_audio(video_segments, audio_segments):
+    combined_data = []
+
+    for vid, aud in zip(video_segments, audio_segments):
+        if vid['label'] != aud['label']:
+            print(f"There is a label mismatch in segment {vid['start_time_in_sec']} and {aud['start_time_in_sec']}")
+            continue
+
+        combined_data.append({
+            "frames": vid['frames'],
+            "mfcc": aud['mfcc'],
+            "label": vid['label']
+        })
+    
+    return combined_data
+
+# Print combined data
+combined_segments = combine_video_and_audio(video_segments, audio_segments)
+print(f"{len(combined_segments)} segments of video and audio combined")
