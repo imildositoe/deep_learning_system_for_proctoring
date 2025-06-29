@@ -1,3 +1,4 @@
+"""This file contains functions to prepare the data"""
 import os
 
 """Function to parse the mmss time into seconds in the ground truth txt file
@@ -27,4 +28,10 @@ def gt_file_to_dict(gt_path):
                     "cheating_type": label
                 })
     return dictionary
+
+# Print the dictionary
+gt_file_path = os.path.join(r'C:\Users\Dell 88\Desktop\OEP database\subject1', 'gt.txt')
+cheating_dict = gt_file_to_dict(gt_file_path)
+for item in cheating_dict[:5]:
+    print(item)
 
