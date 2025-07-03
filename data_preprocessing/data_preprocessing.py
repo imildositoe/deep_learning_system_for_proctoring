@@ -31,3 +31,9 @@ def extract_frames(video_path, seq_len=FRAME_SIZE):
         return np.array(frames)
     return None
 
+def extract_audio_mfcc(audio_path):
+    audio, _ = librosa.load(audio_path, sr=AUDIO_SR)
+    mfcc = librosa.feature.mfcc(y=audio, sr=AUDIO_SR, n_mfcc=13)
+    mfcc = librosa.util.fix_length(mfcc, size=MFCC_SIZE, axis=1)
+    return mfcc
+
